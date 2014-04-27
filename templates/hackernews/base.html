@@ -1,0 +1,63 @@
+{% load static %}
+
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<meta name ="viewport" content="width=device-width, initial-scale=1.0">
+		<!-- Bootstrap  -->
+		<link href="{% static 'css/bootstrap-fluid-adj.css' %}" rel="stylesheet">
+		<link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" media="screen">
+		<link href="{% static 'css/bootstrap-responsive.css' %}" rel="stylesheet">
+
+		<title>{% block title %}Tuts+ News{% endblock %}</title>
+	</head>
+
+	<body>
+		<div class="navbar navbar-inverse navbar-fixed-top">
+		   <div class="navbar-inner">
+		       <div class="container">
+		           <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+		               <span class="icon-bar"></span>
+		               <span class="icon-bar"></span>
+		               <span class="icon-bar"></span>
+		           </button>
+		           <a class="brand" href="/">Hacker News</a>
+
+		           <div class="nav-collapse collapse">
+		               <ul class="nav pull-right">
+		                   {% if user.is_authenticated %}
+		                    <li class="navbar-text">Welcome, {{ user.username }}!</li>
+		                    <li><a href="/hackernews/logout/">Logout</a></li>
+		                   {% else %}
+		                    <li><a href="/hackernews/register/">Register</a></li>
+		                    <li><a href="/hackernews/login/">Login</a></li>
+		                   {% endif %}
+		               </ul>
+		               <ul class="nav">
+		                   {% if user.is_authenticated %}
+		                    <li><a href="/hackernews/add_category/">Add Category</a></li>
+		                   {% endif %}
+		               </ul>
+		           </div>
+		           <!--/.nav-collapse -->
+		       </div>
+		   </div>
+		</div>
+
+		<div class="container-fluid">
+    		<div class="row-fluid">
+				<div class="span12">
+					{% block content %}
+
+					{% endblock %}
+				</div>
+			</div>
+		</div>
+
+		<script src="{% static 'js/jquery-2.1.0.min.js' %}"></script>
+		<script src="{% static 'js/bootstrap.min.js' %}"></script>	
+		<!-- <script src="{% static 'js/rango-ajax.js' %}"></script>  -->	
+
+	</body>
+</html>

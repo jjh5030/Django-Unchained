@@ -1,0 +1,23 @@
+{% extends 'hackernews/base.html' %}
+{% load story_extras %}
+
+{% block title %}Tuts+ News{% endblock %}
+
+{% block content %}
+
+<ol>
+	{% if stories %}
+		{% for story in stories %}
+			<li>
+				<p class="story-title">
+					<a href="{{ story.url }}">{{ story.title }}</a><span class="domain"> ({{ story.domain }})</span>
+					<p class="story-info">
+						{{ story.points }} points by {{ story.moderator.username }} {{ story.created_at|age }}
+					</p>
+				</p>
+			</li>
+		{% endfor %}
+	{% endif %}
+</ol>
+
+{% endblock content %}
