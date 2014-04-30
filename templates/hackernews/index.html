@@ -1,7 +1,8 @@
 {% extends 'hackernews/base.html' %}
 {% load story_extras %}
+{% load static %}
 
-{% block title %}Tuts+ News{% endblock %}
+{% block title %}Slacker News{% endblock %}
 
 {% block content %}
 
@@ -10,14 +11,31 @@
 		{% for story in stories %}
 			<li>
 				<p class="story-title">
-					<a href="{{ story.url }}">{{ story.title }}</a><span class="domain"> ({{ story.domain }})</span>
-					<p class="story-info">
-						{{ story.points }} points by {{ story.moderator.username }} {{ story.created_at|age }}
-					</p>
+					{% if user.is_authenticated and story not in liked_stories %}
+					<a href ="/vote/" id="story-vote-{{ story.id }}" class="vote" ><img src="{% static 'img/arrow.gif' %}"></a>
+					<a href="{{ story.url }}" id="story-title-{{ story.id }}">{{ story.title }}</a><span class="domain"> ({{ story.domain }})</span>
+					{% else %}
+					<a href="{{ story.url }}" style="margin-left: 15px;">{{ story.title }}</a><span class="domain"> ({{ story.domain }})</span>
+					{% endif %}
 				</p>
+
+				<p class="story-info" style="margin-left: 15px;">
+					{{ story.points }} points by {{ story.moderator.username }} {{ story.created_at|age }}
+				</p>
+
 			</li>
 		{% endfor %}
 	{% endif %}
 </ol>
 
 {% endblock content %}
+
+<!-- 
+<button id ="upvote" type="button" class="btn btn-success btn-sm">
+<span class="glyphicon glyphicon-thumbs-up"></span>
+</button>
+<button id ="downvote" type="button" class="btn btn-danger btn-sm">
+<span class="glyphicon glyphicon-thumbs-down"></span>
+</button>
+
+-->

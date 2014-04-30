@@ -41,6 +41,7 @@ INSTALLED_APPS = (
 	'django.contrib.messages',
 	'django.contrib.staticfiles',
 	'stories',
+	'south',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -106,3 +107,6 @@ STATICFILES_DIRS = (
 MEDIA_URL = '/media/'
 
 MEDIA_ROOT = os.path.join(PROJECT_PATH, 'media')
+
+LOGIN_URL = '/login/'
+LOGIN_REDIRECT_URL = '/'
