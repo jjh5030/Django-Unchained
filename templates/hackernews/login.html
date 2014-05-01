@@ -4,29 +4,16 @@
 
 {% block content %}
 
-<div class="hero-unit">
+    <div class="container">
 
-	<div class="container">
+      <form class="form-signin" role="form" id="login_form" method="post" action="/login/">
+      	{% csrf_token %}
+        <h2 class="form-signin-heading">Please sign in</h2>
+        <input type="text" class="form-control" placeholder="Username" name="username" value="" required autofocus>
+        <input type="password" class="form-control" placeholder="Password" name="password" value="" required>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+      </form>
 
-	<form class="form-signin span4" id="login_form" method="post" action="/login/">
-		<h2 class="form-signin-heading">Please Sign In</h2>
-		{% csrf_token %}
-
-		{% if bad_details %}
-		<p><strong>Your username and/or password were incorrect!</strong></p>
-		{% elif disabled_account %}
-		<p><strong>Your account is currently disabled; we can't log you in!</strong></p>
-		{% endif %}
-
-		Username: <input type="text" class="input-block-level" placeholder="Username" name="username" value="" size="50" />
-		<br/> 
-		Password: <input type="password" class="input-block-level" placeholder="Password" name="password" value="" size="50" />
-		<br/>
-		<button class="btn btn-primary" type="submit">Sign In</button>
-	</form>
-
-</div>
-
-</div>
+    </div> <!-- /container -->
 		
 {% endblock %}

@@ -24,7 +24,7 @@ def top_stories(top=180, consider=1000):
 	return [story for _, story in rank_stories][:top]
 
 def index(request):
-	stories = top_stories(top=30)
+	stories = top_stories(top=50)
 	context_dict = {'stories': stories}
 	context_dict['user'] = request.user
 
@@ -95,6 +95,7 @@ def register(request):
 			user.save()
 
 			registered = True
+			return HttpResponseRedirect('/login/')
 		else:
 			print user_form.errors
 	else:
@@ -115,3 +116,12 @@ def vote(request):
 	user.liked_stories.add(story)
 	user.save()
 	return HttpResponse()
+
+def story_detail(request, story_id):
+	context_dict = {}
+	context_dict['user'] = request.user
+
+	story = get_object_or_404(Story, pk=story_id)
+	context_dict['story'] = story
+
+	return render(request, 'hackernews/detail.html', context_dict)

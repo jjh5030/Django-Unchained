@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 
 class Story(models.Model):
 	title = models.CharField(max_length=200)
+	description = models.TextField()
 	url = models.URLField()
 	points = models.IntegerField(default=1)
 	moderator = models.ForeignKey(User, related_name='moderated_stories')

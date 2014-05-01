@@ -4,11 +4,19 @@
 
 {% block content %}
 
-	<form action="/story/" method="post">
-		{% csrf_token %}
-		{{ form.as_p }}
-		<input type="submit" value = "Submit" />
+    <div class="container">
 
-	</form>
+      <form action="/story/" method="post">
+      	{% csrf_token %}
+        <input type="text" class="form-control" placeholder="Title" name="title" value="" required autofocus>
+        <br/>
+        <textarea class="form-control" rows="3" placeholder="Description" name="description" value=""></textarea>
+        <br/>
+        <input type="text" class="form-control" placeholder="Url" name="url" value="">
+        <br/>
+        <button class="btn btn-lg btn-primary" type="submit" name="Submit">Submit</button>
+      </form>
+
+    </div> 
 
 {% endblock content %}
